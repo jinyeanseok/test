@@ -1,0 +1,182 @@
+git 사용법
+
+# 내 작업 폴더에서 작업
+cd /home/~~jys
+
+mkdir git-tutorial      // 관행으로
+
+git init
+
+ls -la     // .git이 나와야함
+
+----------------------------------------------------------------------
+
+# 로컬저장소와 원격저장소랑 연결
+
+github접속
+
+새로운 원격저장소 생성(레퍼지스토리)
+
+# 내 레퍼지스토리를 원격저장소랑 연결
+git remote add origin https://github.com/jinyeanseok/git-tutorial.git
+
+git remote    // 원격저장소가 생긴걸 확인할 수 있음
+
+
+/*---------------------------------------------------------------------
+git은 시스템
+github는 git을 통해 만들어진 작업물을 호스팅
+remote로 local과 연결만 함
+---------------------------------------------------------------------*/
+
+
+# 파일 등록하기
+
+git add .
+
+git status
+
+git config user.name "jinyeanseok"
+
+git config user.email "wdtcwek11@naver.com"
+
+git commit -m "init"    //메시지를 작성할 수 있는 기능
+
+git log     # commit 확인
+
+git push origin master
+
+## commit 후 push 중첩이 되기에 일일이 하나씩 할 필요 x    ex) commit 3번하고 push는 한번
+
+----------------------------------------------------------------------
+
+# git 복구하는법
+
+git reset .
+
+----------------------------------------------------------------------
+
+
+# commit 취소하는 법
+
+git log 로 해당 파일의 commit 확인
+
+만약 두 번째 파일로 돌아가려면 그 두 번째 파일의 commit이 필요함
+
+commit : be158342b1756ed95b34a5a17540cdb0706369fd
+
+git reset --hard be158342b1756ed95b34a5a17540cdb0706369fd
+
+git log
+
+git push origin master -f (-f:강제)
+
+----------------------------------------------------------------------
+
+# 삭제 하는 법
+
+rm -rf git-tutorial/
+
+----------------------------------------------------------------------
+
+
+# branch 만들기
+
+cd git-tutorial/
+
+git checkout -b test
+
+git branch
+
+git checkout master   //branch 전환
+
+git branch
+
+git checkout test
+
+파일 추가, 수정 (test.txt)
+
+git add .
+git commit -m "add a new branch"
+
+git push origin test
+
+
+----------------------------------------------------------------------
+
+# test에서 master로 다시 병합(이렇게하면 master를 다치게하지 않고 test에서 실행 가능)
+
+git checkout master
+
+git branch
+
+git merge test   //merge하면 commit도 자동으로 만들어짐
+
+git push origin master
+
+git checkout test
+
+## helloworld, test.txt파일 두군데에서 아랫줄에 test추가
+
+git add .
+
+git commit -m "add test"
+
+git push origin master
+
+----------------------------------------------------------------------
+
+
+# 레퍼지 지우는법
+github - setting - danger zone - 레퍼지스토리 이름 입력
+
+----------------------------------------------------------------------
+
+
+----------------------------------------------------------------------
+
+# eos.hs project 만들기
+
+1. 30만번째 블록의 프로듀서와 생성 시간을 가져오기
+2. 해당 블록 프로듀서의 계정 생성 시간 가져오기
+3. 해당 블록 프로듀서의 EOS 잔액
+
+eosjs
+
+# github 만들기
+
+cd jys
+
+mkdir eosjs-simple-project
+
+cd eosjs-simple-project/
+
+git init
+
+git config user.name jinyeanseok
+
+git config user.email wdtcwek11@naver.com
+
+# visualcode jys 폴더에 eosjs-simple-project에서 file생성해서 problem1~3 생성
+
+npm init -y     // npm init으로 패키지를 관리하겠다
+
+# ls -al 하여 package.json이 생성되었는지 확인해야함
+
+npm install --save eosjs node-fetch util      // global은 전체  local은 eosjs-simple-project만 설치
+
+node_modules가 생김 (이패키지들은 git에 올릴필요가 없음 저장공간낭비)
+
+ eosjs-simple-project에서  .gitignore 생성
+- 자동으로 무시를 할 수 있음 node-modules를
+- gitignore에 node_modules/ 입력     ///이렇게 하면 gitignore는 github에 안올라감
+- node_modules/ 를 한 이유는 node_modules/를 올리지 않겠다는 뜻
+
+git add .
+git commit -m "init"
+
+git remote add origin https://github.com/jinyeanseok/eosjs-simple-project.git
+
+git push origin master
+
+---------------------------------------------------------------------
